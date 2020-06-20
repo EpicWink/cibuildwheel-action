@@ -1,0 +1,16 @@
+name: cibuildwheel
+description: Run cibuildwheel to build manylinux wheels
+branding:
+  icon: package
+  color: yellow
+
+inputs:
+  wheel-dir:
+    description: Output wheel directory
+    default: wheelhouse
+runs:
+  using: docker
+  image: Dockerfile
+  args:
+    - --output-dir
+    - ${{ inputs.wheel-dir }}
