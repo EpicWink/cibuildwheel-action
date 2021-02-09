@@ -9,8 +9,9 @@ inputs:
     description: Output wheel directory
     default: wheelhouse
 runs:
-  using: docker
-  image: Dockerfile
-  args:
-    - --output-dir
-    - ${{ inputs.wheel-dir }}
+  using: composite
+  steps:
+    - run: python -m pip install cibuildwheel==1.9.0
+      shell: bash
+    - run: python -m cibuildwheel --output-dir ${{ inputs.wheel-dir }}
+      shell: bash
